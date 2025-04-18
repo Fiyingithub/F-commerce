@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import  {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
@@ -14,7 +14,7 @@ function ViewProducts() {
   };
 
   // Sort from new to old
-  const sortedProducts = products.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+  const sortedProducts = products.sort((a: number, b: number) => new Date(b.dateAdded) - new Date(a.dateAdded));
 
   useEffect(() => {
     const getAllProducts = async () => {
