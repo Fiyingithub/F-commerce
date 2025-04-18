@@ -1,6 +1,6 @@
 
 
-// import cat7 from '../../Asset/ProductImages/RIPI8797.PNG';
+// import cat7 from '../../Asset/ProductImages/bigHeadPhone.PNG';
 import cat7 from '../../Asset/ProductImages/Mouse.png'
 
 const FeaturedProduct = () => {

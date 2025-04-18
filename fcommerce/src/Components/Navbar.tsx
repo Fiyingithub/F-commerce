@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 // Icons
@@ -28,13 +28,13 @@ function Navbar() {
           </div>
 
           <div className="flex text-black space-x-4 items-center ">
-            <div to='#' className='hidden lg:flex items-center'><input type="text" placeholder='Search products' className='border border-gray-300 px-2 py-1 lg:w-[300px] rounded-xl outline-none ' /><IoSearch className='text-3xl bg-secondary p-1 rounded-full'/></div>
+            <div className='hidden lg:flex items-center'><input type="text" placeholder='Search products' className='border border-gray-300 px-2 py-1 lg:w-[300px] rounded-xl outline-none ' /><IoSearch className='text-3xl bg-secondary p-1 rounded-full'/></div>
             {/* <span className='flex items-center gap-2 font-medium'><FaRegUser className='text-xl'/>{user.username}</span> */}
             <Link to='/cart' className='flex items-center gap-2'><MdOutlineShoppingCart className='text-xl'/>Cart</Link>
             <TiThMenu className='text-2xl lg:hidden ' onClick={() => setIsOpen(!isOpen)}/>
           </div>
         </div>
-        <div to='#' className='flex items-center justify-center w-full px-4 lg:hidden '>
+        <div className='flex items-center justify-center w-full px-4 lg:hidden '>
           <input type="text" placeholder='Search products' className='border border-gray-300 px-2 py-1 w-full rounded-full outline-none ' />
           <IoSearch className='text-3xl bg-secondary p-1 rounded-full'/>
         </div>

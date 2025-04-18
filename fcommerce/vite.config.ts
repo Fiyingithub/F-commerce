@@ -13,5 +13,6 @@ export default defineConfig({
   //     }
   //   },
   // }
+  assetsInclude: ['**/*.PNG', '**/*.JPG', '**/*.WEBP', '**/*.PNG'],
   plugins: [react(), tailwindcss(),],
 })

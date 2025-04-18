@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 function Footer() {
   return (
     <div>
-      <footer className="bg-secondary text-primary py-6 hidden lg:block">
+      <footer className="bg-[#feefec] text-[#f2592b] py-6 hidden lg:block">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="text-center md:text-left">
             <p className="text-lg font-semibold">oneWorld</p>
           </div>
           <div className="flex space-x-4 mt-4 md:mt-0">
-            <Link to="landingPage.html" className="hover:text-gray-400">Home</Link>              
+            <Link to="/" className="hover:text-gray-400">Home</Link>              
             <Link to="#" className="hover:text-gray-400">Privacy Policy</Link>
             <Link to="#" className="hover:text-gray-400">Terms of Service</Link>
             <Link to="#" className="hover:text-gray-400">Contact Us</Link>

@@ -1,106 +1,124 @@
-// ToastContext.js
-import { createContext, useContext, useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+} from "react";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContextType, CartItem } from "../Types/Toast";
 
-const ToastContext = createContext();
+const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
-// Create a provider component
-export const ToastProvider = ({ children }) => {
-  const notifySuccess = (message, options = {}) => toast.success(message, options);
-  const notifyError = (message, options = {}) => toast.error(message, options);
-  const notifyInfo = (message, options = {}) => toast.info(message, options);
-  const notifyWarn = (message, options = {}) => toast.warn(message, options);
-  const [waitingLoader, setWaitingLoader] = useState(false);
-  const [spinnerLoader, setSpinnerLoader] = useState(false);
-  const cartId = localStorage.getItem('cartId')
+interface Props {
+  children: ReactNode;
+}
 
-  const showSpinnerLoader = () => {
-    setSpinnerLoader(true)
-  }
-  const hideSpinnerLoader = () => {
-    setSpinnerLoader(false)
-  }
+export const ToastProvider = ({ children }: Props) => {
+  const [waitingLoader, setWaitingLoader] = useState<boolean>(false);
+  const [spinnerLoader, setSpinnerLoader] = useState<boolean>(false);
 
-  const startWaitingLoader = () => {
-    setWaitingLoader(true)
-  }
+  const cartId = localStorage.getItem("cartId");
 
-  const stopWaitingLoader = () => {
-    setWaitingLoader(false)
-  }
+  const notifySuccess = (message: string, options = {}) =>
+    toast.success(message, options);
+  const notifyError = (message: string, options = {}) =>
+    toast.error(message, options);
+  const notifyInfo = (message: string, options = {}) =>
+    toast.info(message, options);
+  const notifyWarn = (message: string, options = {}) =>
+    toast.warn(message, options);
 
-  // Add to cart
-  const addToCart = async (item) => {
-    startWaitingLoader()
+  const showSpinnerLoader = () => setSpinnerLoader(true);
+  const hideSpinnerLoader = () => setSpinnerLoader(false);
+  const startWaitingLoader = () => setWaitingLoader(true);
+  const stopWaitingLoader = () => setWaitingLoader(false);
+
+  const addToCart = async (item: CartItem): Promise<void> => {
+    startWaitingLoader();
     try {
       if (!cartId) {
-        const response = await axios.post('https://oneworld-fq81.onrender.com/api/Cart/create');
-        localStorage.setItem('cartId', response.data.cartId)
-        stopWaitingLoader()
-        // console.log(response.data)
+        const response = await axios.post(
+          "https://oneworld-fq81.onrender.com/api/Cart/create"
+        );
+        localStorage.setItem("cartId", response.data.cartId);
 
         try {
-          const res = await axios.post(`https://oneworld-fq81.onrender.com/api/Cart/${response.data.cartId}/add-item`, item);
-          console.log(res.data)
-          stopWaitingLoader()
+          await axios.post(
+            `https://oneworld-fq81.onrender.com/api/Cart/${response.data.cartId}/add-item`,
+            item
+          );
         } catch (err) {
-          console.log(err)
-          stopWaitingLoader()
+          console.error(err);
+        } finally {
+          stopWaitingLoader();
         }
-
-        return
+        return;
       }
 
-      if (cartId) {
-        try {
-          const res = await axios.post(`https://oneworld-fq81.onrender.com/api/Cart/${cartId}/add-item`, item);
-          console.log(res.data)
-          stopWaitingLoader()
-        } catch (err) {
-          console.log(err)
-          stopWaitingLoader()
-        }
-      }
+      await axios.post(
+        `https://oneworld-fq81.onrender.com/api/Cart/${cartId}/add-item`,
+        item
+      );
     } catch (error) {
-      notifyError('Error adding item to cart', {
+      notifyError("Error adding item to cart", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-      });
-      stopWaitingLoader()
+      },);
+
+      console.log(error)
+    } finally {
+      stopWaitingLoader();
     }
-  }
+  };
 
-  function formatDate(dateString) {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+  const formatDate = (dateString: string): string =>
+    new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
-  }
 
-  function formatNumberWithCommas(number) {
-    number = Number(number);
-    return number.toLocaleString(undefined, { maximumFractionDigits: 0 });
-  }
+  const formatNumberWithCommas = (number: number): string =>
+    number.toLocaleString(undefined, { maximumFractionDigits: 0 });
 
-  const formatAmount = (amt) =>
-    amt
-      .toFixed(2)
-      .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const formatAmount = (amt: number): string =>
+    amt.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   return (
-    <ToastContext.Provider value={{ notifySuccess, notifyError, notifyInfo, notifyWarn, waitingLoader, startWaitingLoader, stopWaitingLoader, spinnerLoader, showSpinnerLoader, hideSpinnerLoader, addToCart, formatDate, formatNumberWithCommas, formatAmount }}>
+    <ToastContext.Provider
+      value={{
+        notifySuccess,
+        notifyError,
+        notifyInfo,
+        notifyWarn,
+        waitingLoader,
+        startWaitingLoader,
+        stopWaitingLoader,
+        spinnerLoader,
+        showSpinnerLoader,
+        hideSpinnerLoader,
+        addToCart,
+        formatDate,
+        formatNumberWithCommas,
+        formatAmount,
+      }}
+    >
       {children}
       <ToastContainer />
     </ToastContext.Provider>
   );
 };
 
-export const useToast = () => useContext(ToastContext);
+export const useToast = (): ToastContextType => {
+  const context = useContext(ToastContext);
+  if (!context) {
+    throw new Error("useToast must be used within a ToastProvider");
+  }
+  return context;
+};

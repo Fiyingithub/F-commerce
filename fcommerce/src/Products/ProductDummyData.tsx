@@ -1,19 +1,19 @@
 // All prod images
 import prod1 from '../Asset/ProductImages/cctv.jpg'
-import prod2 from '../Asset/ProductImages/DBDV2670.JPEG'
+import prod2 from '../Asset/ProductImages/Gamepad.jpeg'
 import prod3 from '../Asset/ProductImages/Gamepad.jpeg'
 import prod4 from '../Asset/ProductImages/HeadPhone.webp'
 import prod5 from '../Asset/ProductImages/Keyboard.webp'
 import prod6 from '../Asset/ProductImages/Mouse.png'
-import prod7 from '../Asset/ProductImages/RIPI8797.PNG'
+import prod7 from '../Asset/ProductImages/Gamepad.jpeg'
 
 // All cat images
-import cat1 from '../Asset/CatImages/IMG_8221.JPG'
-import cat2 from '../Asset/CatImages/IMG_8226.PNG'
-import cat3 from '../Asset/CatImages/IMG_8227.JPG'
-import cat4 from '../Asset/CatImages/IMG_8229.JPG'
-import cat5 from '../Asset/CatImages/IMG_8228.WEBP'
-import cat6 from '../Asset/CatImages/IMG_8230.JPG'
+import cat1 from '../Asset/CatImages/HeadPhone.webp'
+import cat2 from '../Asset/CatImages/HeadPhone.webp'
+import cat3 from '../Asset/CatImages/HeadPhone.webp'
+import cat4 from '../Asset/CatImages/HeadPhone.webp'
+import cat5 from '../Asset/CatImages/HeadPhone.webp'
+import cat6 from '../Asset/CatImages/HeadPhone.webp'
 import cat7 from '../Asset/CatImages/HeadPhone.webp'
 
 export const allProducts = [

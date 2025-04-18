@@ -4,6 +4,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Components
 import LandingPage from "./Pages/Landing/LandingPage";
+import { ToastProvider } from "./Loaders/ToastContext";
+import Cart from "./Cart/Cart";
+import OrderStatus from "./Orders/OrderStatus";
+import Checkout from "./Cart/Checkout";
+import SortedProductDisplay from "./Products/SortedProductDisplay";
+import ProductDetails from "./Products/ProductDetails";
+import SignupPage from "./Auth/SignupPage";
+import LoginPage from "./Auth/LoginPage";
+import Example from "./Pages/Example";
 // import SortedProductDisplay from './Products/SortedProductDisplay';
 // import ProductDetails from './Products/ProductDetails';
 // import SignupPage from './Auth/SignupPage';
@@ -33,16 +42,9 @@ function App() {
     //   <Router>
     //     <Routes>
     //       <Route path="/" element={<LandingPage/>} />
-    //       {/* <Route path="/products" element={<SortedProductDisplay/>} />
-    //       <Route path="/productdetails" element={<ProductDetails/>} />
-    //       <Route path="/signup" element={<SignupPage/>} />
-    //       <Route path="/login" element={<LoginPage/>} />
-    //       <Route path="/example" element={<Example/>} /> */}
+    //
 
-    //       {/* Orders */}
-    //       {/* <Route path="/orderstatus" element={<OrderStatus/>} />
-    //       <Route path="/cart" element={<Cart/>} />
-    //       <Route path="/checkout/summary" element={<Checkout/>} /> */}
+    //
 
     //       {/* Admin */}
     //       {/* <Route path="/admin/dashboard" element={<Dashboard/>} />
@@ -53,11 +55,23 @@ function App() {
     //   </Router>
     // </ToastProvider>
 
-    <Router>
-      <Routes>
-      <Route path="/" element={<LandingPage />} />
-    </Routes>
-    </Router>
+    <ToastProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/products" element={<SortedProductDisplay />} />
+          <Route path="/productdetails" element={<ProductDetails />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/login" element={<LoginPage />} /> 
+          <Route path="/example" element={<Example />} />
+
+          {/* Orders */}
+          <Route path="/orderstatus" element={<OrderStatus />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout/summary" element={<Checkout />} />
+        </Routes>
+      </Router>
+    </ToastProvider>
   );
 }
 

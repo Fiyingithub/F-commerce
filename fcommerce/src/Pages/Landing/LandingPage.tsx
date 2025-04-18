@@ -7,7 +7,7 @@ import Categories from './Categories';
 import FeaturedProduct from './FeaturedProduct';
 
 import man from '../../Asset/images/man.png';
-// import AllProducts from './AllProducts';
+import AllProducts from './AllProducts';
 
 function LandingPage() {
 
@@ -20,9 +20,6 @@ function LandingPage() {
       <div className="sticky top-0 z-50 w-full">
         <Navbar/>
       </div>
-      {/* "primary": "#f2592b",
-  //       "secondary": "#feefec",
-  //       "hover" : "#ce5733" */}
       <div className=" lg:h-[300px] w-[100%] flex items-center justify-center relative">
         <div className="flex flex-col gap-10 lg:flex-row justify-center items-center lg:max-w-[1100px] bg-[#feefec] w-[100%] pt-10 lg:pt-0 lg:px-10 ">
           <div className="flex flex-col space-y-6 px-4">
@@ -43,7 +40,7 @@ function LandingPage() {
       <FeaturedProduct />
       
       {/* All products */}
-      {/* <AllProducts/> */}
+      <AllProducts/>
 
       <Footer/>
     </div>
